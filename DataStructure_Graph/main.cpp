@@ -50,19 +50,27 @@ const MatrixGraph& CreateGraph( )
         sprintf( &graph.vertex[i], "%c", temp++ );
     }
 
+    // --- A-B A-F ---
     graph.arc[0][1] = 1;
     graph.arc[0][5] = 1;
+    // --- B-C B-G B-I ---
     graph.arc[1][2] = 1;
     graph.arc[1][6] = 1;
     graph.arc[1][8] = 1;
+    // --- C-D C-I ---
     graph.arc[2][3] = 1;
     graph.arc[2][8] = 1;
+    // --- D-E D-G D-H D-I --- 
     graph.arc[3][4] = 1;
     graph.arc[3][6] = 1;
+    graph.arc[3][7] = 1;
     graph.arc[3][8] = 1;
+    // --- E-F E-H ---
     graph.arc[4][5] = 1;
     graph.arc[4][7] = 1;
+    // --- F-G ---
     graph.arc[5][6] = 1;
+    // ---G-H ---
     graph.arc[6][7] = 1;
 
     for ( size_t i = 0; i < graph.edgeNum; i++ )
