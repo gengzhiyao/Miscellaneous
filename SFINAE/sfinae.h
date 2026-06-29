@@ -2,9 +2,9 @@
 #ifndef MODERNCPP_SFINAE_H
 #define MODERNCPP_SFINAE_H
 
-//~ ~~~~~~~~~~~~~~~~~~~~~~~~SFINAE~~~~~~~~~~~~~~~~~~~~~~~~~~
-//编译器在模板实例化时，如果遇到匹配失败-> 无法按照此方法实例化
-//不会马上报错，而是会继续匹配其他模板实现，努力匹配到一个能够实例化的实现
+// ~~~~~~~~~~~~~~~~~~~~~~~~~SFINAE~~~~~~~~~~~~~~~~~~~~~~~~~~
+// 编译器在模板实例化时，如果遇到匹配失败-> 无法按照此方法实例化
+// 不会马上报错，而是会继续匹配其他模板实现，努力匹配到一个能够实例化的实现
 
 #include <iostream>
 #include <type_traits>
@@ -21,8 +21,7 @@ namespace Analysis
         //Empty
     };
 
-    /// @brief 当Condition为真时，走的是这条路线，将类型T使用type透传下来
-    /// @tparam T 
+    // @brief 当Condition为真时，走的是这条路线，将类型T使用type透传下来
     template<typename T>
     struct enable_if<true,T>
     {
