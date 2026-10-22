@@ -71,7 +71,7 @@ void* MemPool::operator new( std::size_t size )
     }
     else    // 第一次进入或内存池不够时进入
     {
-        MemPool* block = reinterpret_cast<MemPool*>( malloc( BLOCK_SIZE * sizeof( MemPool ) ) );  // return block = &block[0] 
+        MemPool* block = reinterpret_cast<MemPool*>( malloc( BLOCK_SIZE * sizeof( MemPool ) ) );  // return block = &block[0]
 
         for ( size_t i = 1; i < MemPool::BLOCK_SIZE - 1; i++ )
         {
@@ -93,3 +93,29 @@ void MemPool::operator delete( void* obj, std::size_t size )
     deadObj->next = cur;
     MemPool::m_pNextHead = deadObj;
 }
+
+void* IMPLEMENTATION::allocator::allocate( std::size_t objSize )
+{
+    Object* ptr = nullptr;
+    if ( !freeStore )
+    {
+        std::size_t nSize = CHUNK * objSize;
+        ptr = static_cast<Object*>( malloc( nSize ) );
+        for ( size_t i = 0; i < CHUNK - 1; i++ )
+        {
+            ptr->next = ( Object* )( ( char* )ptr + objSize );
+            ptr = ptr->next;
+        }
+        ptr->next = nullptr;    // at last
+    }
+    ptr = freeStore;    // next malloc
+    freeStore = freeStore->next;
+    return ptr;
+}
+
+void IMPLEMENTATION::allocator::deallocate( void* p, std::size_t )
+{
+    static_cast<Object*>( p )->next = freeStore;
+    freeStore = static_cast<Object*>( p );
+}
+
