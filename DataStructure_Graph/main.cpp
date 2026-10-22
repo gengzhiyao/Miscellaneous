@@ -32,7 +32,7 @@ struct MatrixGraph
     }
 };
 
-int visited[MAX_ELEMENTS];
+bool visited[MAX_ELEMENTS];  // index 表示是否已经搜索过的结点
 
 const MatrixGraph& CreateGraph( )
 {
@@ -41,7 +41,7 @@ const MatrixGraph& CreateGraph( )
     graph.edgeNum = 15;
     for ( int i = 0; i < MAX_ELEMENTS; i++ )
     {
-        visited[i] = 0;
+        visited[i] = false;
     }
 
     for ( size_t i = 0; i < 9; i++ )
@@ -85,7 +85,8 @@ const MatrixGraph& CreateGraph( )
 
 void DFS( const MatrixGraph& graph, int vertex )    // 邻接矩阵 - 深度优先搜索
 {
-    visited[vertex] = 1;
+    std::cout << "Current Vertex: " << static_cast<char>( 'A' + vertex );
+    visited[vertex] = true;
 
     std::cout << graph.vertex[vertex] << '\n';
 
@@ -94,7 +95,7 @@ void DFS( const MatrixGraph& graph, int vertex )    // 邻接矩阵 - 深度优�
         // 没有边 或者 邻接点已经被访问，则跳过
         if ( graph.arc[vertex][col] == 0 || visited[col] ) continue;   // 与当前顶点有连线并且没有被访问过的顶点
 
-        DFS( graph, col );
+        DFS( graph, col );  // col 当前顶点
     }
 }
 }    // namespace Graph

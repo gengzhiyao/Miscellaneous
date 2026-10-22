@@ -8,7 +8,7 @@ set(CMAKE_CXX_EXTENSIONS OFF) #禁用编译器扩展
 
 add_definitions()
 
-# add_subdirectory(src)
+add_subdirectory(Allocator)
 
 add_subdirectory(Item2)
 add_subdirectory(Item3)
