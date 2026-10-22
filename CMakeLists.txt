@@ -21,4 +21,5 @@ add_subdirectory(New)
 add_subdirectory(IniPaser)
 add_subdirectory(ThreadPool)
 add_subdirectory(DataStructure_Graph)
+add_subdirectory(ConditionVariable)
 
